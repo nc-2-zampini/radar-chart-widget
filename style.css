@@ -1,0 +1,193 @@
+:root {
+  --bg: #191919;
+  --bg-soft: rgba(255,255,255,0.04);
+  --text: #f4f4f4;
+  --muted: rgba(244,244,244,0.7);
+  --card: rgba(255,255,255,0.05);
+  --border: rgba(255,255,255,0.1);
+  --accent: #F98603;
+  --accent-soft: rgba(249, 134, 3, 0.18);
+  --grid: rgba(255,255,255,0.08);
+  --shadow: 0 24px 80px rgba(0,0,0,0.34);
+}
+
+html[data-theme="light"] {
+  --bg: #FFFFFF;
+  --bg-soft: rgba(0,0,0,0.03);
+  --text: #141414;
+  --muted: rgba(20,20,20,0.7);
+  --card: rgba(0,0,0,0.03);
+  --border: rgba(0,0,0,0.08);
+  --grid: rgba(0,0,0,0.08);
+  --shadow: 0 24px 80px rgba(0,0,0,0.08);
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background:
+    radial-gradient(circle at top, var(--bg-soft), transparent 38%),
+    var(--bg);
+  color: var(--text);
+  transition: background-color .35s ease, color .35s ease;
+}
+
+.page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 40px 24px;
+}
+
+.hero {
+  width: min(920px, 100%);
+}
+
+.eyebrow {
+  margin: 0 0 14px;
+  text-transform: uppercase;
+  letter-spacing: .22em;
+  font-size: .72rem;
+  color: var(--muted);
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.2rem, 5vw, 4.6rem);
+  line-height: .95;
+  letter-spacing: -.06em;
+}
+
+.subtitle {
+  margin: 16px 0 28px;
+  max-width: 56ch;
+  color: var(--muted);
+  font-size: 1.03rem;
+  line-height: 1.6;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) 220px;
+  gap: 22px;
+  align-items: center;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  background: /*linear-gradient(180deg, rgba(255,255,255,0.03), transparent 120%),*/ var(--bg);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+}
+
+.chart-wrap {
+  position: relative;
+  min-height: 420px;
+  padding: 8px;
+}
+
+#radarChart {
+  width: 100% !important;
+  height: 420px !important;
+}
+
+.skills-list {
+  display: grid;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 22px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.02);
+}
+
+.skill-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: .98rem;
+}
+
+.skill-row span { color: var(--muted); }
+.skill-row strong {
+  font-size: 1rem;
+  letter-spacing: -.02em;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 58%;
+  right: 39%;
+  transform: translateY(-50%);
+  z-index: 10;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+.toggle-track {
+  width: 54px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  position: relative;
+  transition: background .35s ease, border-color .35s ease;
+}
+
+.toggle-icon {
+  position: relative;
+  z-index: 2;
+  font-size: .72rem;
+  line-height: 1;
+  color: var(--muted);
+  transition: color .35s ease, opacity .35s ease, transform .35s ease;
+}
+
+.toggle-thumb {
+  position: absolute;
+  top: 1.5px;
+  left: 2px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--text);
+  box-shadow: 0 8px 18px rgba(0,0,0,.18);
+  transition: transform .35s cubic-bezier(.2,.9,.2,1), background .35s ease;
+}
+
+html[data-theme="light"] .toggle-thumb {
+  transform: translateX(26px);
+  background: #151515;
+}
+
+html[data-theme="light"] .sun { color: rgba(20,20,20,.25); }
+html[data-theme="light"] .moon { color: var(--text); }
+html[data-theme="dark"] .sun { color: var(--text); }
+html[data-theme="dark"] .moon { color: rgba(244,244,244,.25); }
+
+.theme-toggle:hover .toggle-track { border-color: rgba(249,134,3,.5); }
+
+@media (max-width: 820px) {
+  .card { grid-template-columns: 1fr; }
+  .skills-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 560px) {
+  .page { padding: 24px 16px; }
+  .chart-wrap { min-height: 340px; }
+  #radarChart { height: 340px !important; }
+  .skills-list { grid-template-columns: 1fr; }
+  .theme-toggle {
+    top: 18px;
+    right: 18px;
+    transform: none;
+  }
+}
